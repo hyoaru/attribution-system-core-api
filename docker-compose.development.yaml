@@ -7,9 +7,25 @@ services:
       - "8000:8000"
     volumes:
       - ./pocketbase:/pb
-      - backend_volume_pocketbase:/pb/pb_data
+      - backend_pocketbase_volume:/pb/pb_data
     expose:
       - 8000
 
+  attribution_system_core_api:
+    build: ./api/core
+    container_name: attribution_system_core_api
+    command: npm run dev
+    working_dir: /app
+    ports:
+      - "8001:8001"
+    volumes:
+      - core_api_volume:/app/node_modules
+      - ./api/core:/app
+    depends_on:
+      - attribution_system_backend_pocketbase
+    expose:
+      - 8001
+
 volumes:
-  backend_volume_pocketbase:
+  core_api_volume:
+  backend_pocketbase_volume:
