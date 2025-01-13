@@ -15,6 +15,9 @@ RUN npm install
 # Copy the rest of the code
 COPY . .
 
+# Ensure the correct ownership
+RUN chown -R root:root ./*
+
 # Build the TypeScript project
 RUN npm run build
 
