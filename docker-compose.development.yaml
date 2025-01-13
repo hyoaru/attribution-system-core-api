@@ -1,0 +1,15 @@
+services:
+  attribution_system_backend_pocketbase:
+    build: ./pocketbase
+    container_name: attribution_system_backend_pocketbase
+    working_dir: /pb
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./pocketbase:/pb
+      - backend_volume_pocketbase:/pb/pb_data
+    expose:
+      - 8000
+
+volumes:
+  backend_volume_pocketbase:
