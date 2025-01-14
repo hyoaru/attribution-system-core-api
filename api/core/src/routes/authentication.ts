@@ -45,3 +45,32 @@ router.post("/sign-in", async (req: Request<SignInRequest>, res) => {
 
   res.status(200).json(authData);
 });
+
+/**
+ * @swagger
+ * /authentication/sign-out:
+ *   post:
+ *     summary: Signs out a user
+ *     description: Signs out a user.
+ *     responses:
+ *       200:
+ *         description: Successful sign out
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/SignOutResponse'
+ *       400:
+ *         description: Invalid credentials
+ *       500:
+ *         description: Internal server error
+ */
+router.post("/sign-out", async (req: Request, res) => {
+  const authenticationService: AuthenticationServiceInterface =
+    container.get<AuthenticationServiceInterface>(
+      DI.AuthenticationServiceInterface,
+    );
+
+  await authenticationService.signOut();
+
+  res.status(200).json({ success: true });
+});
