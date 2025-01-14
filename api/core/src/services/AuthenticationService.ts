@@ -1,28 +1,33 @@
 import { RecordAuthResponse } from "pocketbase";
 import { UsersResponse } from "../types/generated/pocketbase-types";
-import { UserRepositoryInterface } from "../repositories/UserRepository.ts.bak";
+import { UserRepositoryInterface } from "../repositories/UserRepository";
+import { injectable, inject } from "inversify";
+import { DI } from "../symbols";
 
 type SignInParams = {
   email: string;
   password: string;
 };
 
-interface AuthenticationServiceInterface {
+export interface AuthenticationServiceInterface {
   signIn(
     params: SignInParams,
   ): Promise<RecordAuthResponse<UsersResponse<unknown>>>;
 }
 
+@injectable()
 export class AuthenticationService implements AuthenticationServiceInterface {
-  userRepository: UserRepositoryInterface;
+  private _userRepository: UserRepositoryInterface;
 
-  constructor(userRepository: UserRepositoryInterface) {
-    this.userRepository = userRepository;
+  constructor(
+    @inject(DI.UserRepositoryInterface) userRepository: UserRepositoryInterface,
+  ) {
+    this._userRepository = userRepository;
   }
 
   async signIn(
     params: SignInParams,
   ): Promise<RecordAuthResponse<UsersResponse<unknown>>> {
-    return this.userRepository.signIn(params);
+    return this._userRepository.signIn(params);
   }
 }

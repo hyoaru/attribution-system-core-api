@@ -1,11 +1,12 @@
 import { Request, Response, NextFunction } from "express";
-import { pb } from "../instances";
+import { PocketbaseService } from "../services/PocketbaseService";
 
 export const authMiddleware = async (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
+  const pb = PocketbaseService.getClient();
   const token = req.headers["authorization"]?.split(" ")[1];
 
   if (!token) {
