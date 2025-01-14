@@ -2,7 +2,7 @@ import { RecordAuthResponse } from "pocketbase";
 import { UsersResponse } from "../types/generated/pocketbase-types";
 import { UserRepositoryInterface } from "../repositories/UserRepository";
 import { injectable, inject } from "inversify";
-import { DI } from "../symbols";
+import { DI } from "../configurations/dependency-injection/symbols";
 
 type SignInParams = {
   email: string;

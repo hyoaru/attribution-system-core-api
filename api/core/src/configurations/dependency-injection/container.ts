@@ -1,16 +1,16 @@
 import { Container } from "inversify";
 import {
-  DocumentRepository,
   DocumentRepositoryInterface,
-} from "./repositories/DocumentRepository";
+  DocumentRepository,
+} from "../../repositories/DocumentRepository";
 import {
-  UserRepository,
   UserRepositoryInterface,
-} from "./repositories/UserRepository";
+  UserRepository,
+} from "../../repositories/UserRepository";
 import {
-  AuthenticationService,
   AuthenticationServiceInterface,
-} from "./services/AuthenticationService";
+  AuthenticationService,
+} from "../../services/AuthenticationService";
 import { DI } from "./symbols";
 
 const container = new Container();

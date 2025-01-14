@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import { app } from "./instances";
 import bodyParser from "body-parser";
-import { swaggerUi, specs } from "./swagger";
+import { swaggerUi, specs } from "./configurations/swagger/swagger";
 import { router as routerAuth } from "./routes/authentication";
 
 export const createApp = () => {
