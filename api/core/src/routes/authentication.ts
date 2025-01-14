@@ -21,30 +21,14 @@ export const router = Router();
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               email:
- *                 type: string
- *                 description: The user's email address
- *                 example: admin@email.com
- *               password:
- *                 type: string
- *                 description: The user's password
- *                 example: adminpassword
+ *             $ref: '#/components/schemas/SignInRequest'
  *     responses:
  *       200:
  *         description: Successful login
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 email:
- *                   type: string
- *                   example: user@example.com
- *                 password:
- *                   type: string
- *                   example: password123
+ *               $ref: '#/components/schemas/SignInResponse'
  *       400:
  *         description: Invalid credentials
  *       500:

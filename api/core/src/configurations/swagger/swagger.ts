@@ -1,5 +1,6 @@
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
+import { components } from "./components";
 
 const options = {
   definition: {
@@ -9,6 +10,7 @@ const options = {
       version: "1.0.0",
       description: "API documentation for the attribution system",
     },
+    components: components,
   },
 
   apis: ["**/*.ts"],
