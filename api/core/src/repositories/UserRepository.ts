@@ -12,6 +12,8 @@ export interface UserRepositoryInterface {
   signIn(
     params: SignInParams,
   ): Promise<RecordAuthResponse<UsersResponse<unknown>>>;
+
+  signOut(): Promise<void>;
 }
 
 @injectable()
@@ -24,5 +26,11 @@ export class UserRepository implements UserRepositoryInterface {
     return await pb
       .collection("users")
       .authWithPassword(params.email, params.password);
+  }
+
+  async signOut(): Promise<void> {
+    const pb = PocketbaseService.getClient();
+
+    return pb.authStore.clear();
   }
 }

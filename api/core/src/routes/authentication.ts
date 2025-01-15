@@ -2,6 +2,7 @@ import { Request, Router } from "express";
 import { container } from "../configurations/dependency-injection/container";
 import { AuthenticationServiceInterface } from "../services/AuthenticationService";
 import { DI } from "../configurations/dependency-injection/symbols";
+import { authMiddleware } from "../middlewares/authMiddleware";
 
 type SignInRequest = {
   email: string;
@@ -59,8 +60,8 @@ router.post("/sign-in", async (req: Request<SignInRequest>, res) => {
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/SignOutResponse'
- *       400:
- *         description: Invalid credentials
+ *       401:
+ *         description: Unauthorized
  *       500:
  *         description: Internal server error
  */

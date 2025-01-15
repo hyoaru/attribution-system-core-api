@@ -26,13 +26,12 @@ export class AuthenticationRepository
     const pb = PocketbaseService.getClient();
 
     return await pb
-      .collection("authentications")
+      .collection("users")
       .authWithPassword(params.email, params.password);
   }
 
   async signOut(): Promise<void> {
     const pb = PocketbaseService.getClient();
-
-    return pb.authStore.clear();
+    pb.authStore.clear();
   }
 }

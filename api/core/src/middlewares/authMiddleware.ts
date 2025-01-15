@@ -6,15 +6,18 @@ export const authMiddleware = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const pb = PocketbaseService.getClient();
-  const token = req.headers["authorization"]?.split(" ")[1];
-
-  if (!token) {
-    return res.status(401).json({ message: "No token provided" });
-  }
-
   try {
-    pb.authStore.loadFromCookie(token);
+    const pb = PocketbaseService.getClient();
+
+    const authHeader = req.headers.authorization;
+    if (!authHeader) throw new Error("Authorization header is required");
+
+    const token = authHeader.split(" ")[1];
+    if (!token) throw new Error("Invalid authorization format");
+
+    pb.authStore.save(token, null);
+    if (!pb.authStore.isValid) throw new Error("Invalid or expired token");
+
     next();
   } catch (error: unknown) {
     if (error instanceof Error) {
