@@ -5,4 +5,5 @@ export const DI = {
   ),
   DocumentRepositoryInterface: Symbol.for("DocumentRepositoryInterface"),
   AuthenticationServiceInterface: Symbol.for("AuthenticationServiceInterface"),
+  DocumentServiceInterface: Symbol.for("DocumentServiceInterface"),
 };

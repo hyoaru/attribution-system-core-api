@@ -1,3 +1,4 @@
+import { NewAttributionRequest } from "./schemas/attribution/NewAttributionRequest";
 import { SignInRequest } from "./schemas/authentication/SignInRequest";
 import { SignInResponse } from "./schemas/authentication/SignInResponse";
 import { SignOutResponse } from "./schemas/authentication/SignOutResponse";
@@ -14,5 +15,6 @@ export const components = {
     SignInRequest,
     SignInResponse,
     SignOutResponse,
+    NewAttributionRequest,
   },
 };

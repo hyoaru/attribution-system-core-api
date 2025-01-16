@@ -19,6 +19,7 @@ services:
     ports:
       - "8001:8001"
     volumes:
+      - /app/uploads
       - core_api_volume:/app/node_modules
       - ./api/core:/app
     depends_on:

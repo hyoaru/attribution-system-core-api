@@ -2,7 +2,6 @@ import { Request, Router } from "express";
 import { container } from "../configurations/dependency-injection/container";
 import { AuthenticationServiceInterface } from "../services/AuthenticationService";
 import { DI } from "../configurations/dependency-injection/symbols";
-import { authMiddleware } from "../middlewares/authMiddleware";
 
 type SignInRequest = {
   email: string;

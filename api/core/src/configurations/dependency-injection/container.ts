@@ -16,6 +16,10 @@ import {
   AuthenticationRepositoryInterface,
   AuthenticationRepository,
 } from "../../repositories/AuthenticationRepository";
+import {
+  DocumentServiceInterface,
+  DocumentService,
+} from "../../services/DocumentService";
 
 const container = new Container();
 
@@ -34,5 +38,9 @@ container
 container
   .bind<AuthenticationServiceInterface>(DI.AuthenticationServiceInterface)
   .to(AuthenticationService);
+
+container
+  .bind<DocumentServiceInterface>(DI.DocumentServiceInterface)
+  .to(DocumentService);
 
 export { container };
