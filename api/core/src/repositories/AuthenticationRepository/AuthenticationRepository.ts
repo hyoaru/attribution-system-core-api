@@ -1,6 +1,6 @@
 import { injectable } from "inversify";
 import { PocketbaseService } from "../../services/PocketbaseService";
-import { AuthenticationRepositoryInterface } from "../AuthenticationRepository";
+import { AuthenticationRepositoryInterface } from "./Interface";
 
 @injectable()
 export class AuthenticationRepository

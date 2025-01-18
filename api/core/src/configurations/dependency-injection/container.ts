@@ -5,10 +5,6 @@ import {
   DocumentRepository,
   DocumentRepositoryInterface,
 } from "../../repositories/DocumentRepository";
-import {
-  UserRepository,
-  UserRepositoryInterface,
-} from "../../repositories/UserRepository";
 import { AttributionService } from "../../services/AttributionService/AttributionService";
 import { AttributionServiceInterface } from "../../services/AttributionService/Interface";
 import {
@@ -22,6 +18,8 @@ import { AuthenticationRepository } from "../../repositories/AuthenticationRepos
 import { AuthenticationRepositoryInterface } from "../../repositories/AuthenticationRepository/Interface";
 import { AuthenticationService } from "../../services/AuthenticationService/AuthenticationService";
 import { AuthenticationServiceInterface } from "../../services/AuthenticationService/Interface";
+import { UserRepositoryInterface } from "../../repositories/UserRepository/Interface";
+import { UserRepository } from "../../repositories/UserRepository/UserRepository";
 
 const container = new Container();
 
