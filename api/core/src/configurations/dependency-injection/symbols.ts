@@ -8,5 +8,5 @@ export const DI = {
   AuthenticationServiceInterface: Symbol.for("AuthenticationServiceInterface"),
   DocumentServiceInterface: Symbol.for("DocumentServiceInterface"),
   AttributionServiceInterface: Symbol.for("AttributionServiceInterface"),
-  MlApiServiceInterface: Symbol.for("MlApiServiceInterface"),
+  MlApiClientInterface: Symbol.for("MlApiClientInterface"),
 };

@@ -4,8 +4,6 @@ import { container } from "../configurations/dependency-injection/container";
 import { DI } from "../configurations/dependency-injection/symbols";
 import { authMiddleware } from "../middlewares/authMiddleware";
 import { AttributionServiceInterface } from "../services/AttributionService/Interface";
-import { DocumentServiceInterface } from "../services/DocumentService/Interface";
-import { MlApiServiceInterface } from "../services/MlApiService/Interface";
 import { AuthenticatedRequest } from "../types/globals/AuthenticatedRequest";
 import { FileParser } from "../utilities/FileParser";
 
@@ -53,12 +51,6 @@ router.post(
     const { title, sector } = req.body;
     const document = req.file;
 
-    const mlApiService: MlApiServiceInterface =
-      container.get<MlApiServiceInterface>(DI.MlApiServiceInterface);
-
-    const documentService: DocumentServiceInterface =
-      container.get<DocumentServiceInterface>(DI.DocumentServiceInterface);
-
     const attributionService: AttributionServiceInterface =
       container.get<AttributionServiceInterface>(
         DI.AttributionServiceInterface,
@@ -70,26 +62,16 @@ router.post(
         res.status(400).json({ message: "Document file is required" });
         return;
       }
+
+      // Parse the multer file
       const parsedDocument = await FileParser.parseMulterFile(document);
-
-      // Make an attribution call to the ML API
-      const attributionData = await mlApiService.evaluate({
-        sector: sector,
-        file: parsedDocument,
-      });
-
-      // Create the document record in the database
-      const documentRecord = await documentService.create({
-        title: title,
-        document: parsedDocument,
-      });
 
       // Attribute the document
       const attributionRecord = await attributionService.attribute({
         sector: sector,
         userId: req.user!.id,
-        documentId: documentRecord.id,
-        attribution: attributionData,
+        title: title,
+        document: parsedDocument,
       });
 
       res.status(200).json(attributionRecord);

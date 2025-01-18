@@ -5,7 +5,7 @@ type EvaluateParams = {
   file: File;
 };
 
-export interface MlApiServiceInterface {
+export interface MlApiClientInterface {
   getLogs(): Promise<string[]>;
   getStatus(): Promise<Status>;
   getSectors(): Promise<string[]>;

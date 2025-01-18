@@ -2,10 +2,10 @@ import FormData from "form-data";
 import { injectable } from "inversify";
 import { EvaluationResponse, Status } from "../../types/ml-types";
 import { axiosMl } from "../../utilities/axios-instances/axiosMl";
-import { MlApiServiceInterface } from "./Interface";
+import { MlApiClientInterface } from "./Interface";
 
 @injectable()
-export class MlApiService implements MlApiServiceInterface {
+export class MlApiClient implements MlApiClientInterface {
   async getLogs(): Promise<string[]> {
     return await axiosMl
       .get<string[]>("/api/v1/logs")
