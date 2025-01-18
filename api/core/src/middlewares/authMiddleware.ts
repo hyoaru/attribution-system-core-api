@@ -1,8 +1,9 @@
-import { Request, Response, NextFunction } from "express";
+import { Response, NextFunction } from "express";
 import { PocketbaseService } from "../services/PocketbaseService";
+import { AuthenticatedRequest } from "../types/globals/AuthenticatedRequest";
 
 export const authMiddleware = async (
-  req: Request,
+  req: AuthenticatedRequest,
   res: Response,
   next: NextFunction,
 ) => {
@@ -17,6 +18,12 @@ export const authMiddleware = async (
 
     pb.authStore.save(token, null);
     if (!pb.authStore.isValid) throw new Error("Invalid or expired token");
+
+    // Fetch the authenticated user
+    const user = await pb.collection("users").authRefresh();
+
+    // Attach the authenticated user
+    req.user = user.record;
 
     next();
   } catch (error: unknown) {

@@ -2,6 +2,6 @@ import { createApp } from "./src/index";
 
 const app = createApp();
 
-app.listen(8001, () => {
-  console.log("Server is running on port 8001");
+app.listen(8002, () => {
+  console.log("Server is running on port 8002");
 });

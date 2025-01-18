@@ -4,7 +4,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "typegen": "npx pocketbase-typegen --url http://localhost:8000 --email admin@email.com --password 'adminpassword' --out ./src/types/generated/pocketbase-types.ts",
+    "typegen:pocketbase": "npx pocketbase-typegen --url http://localhost:8000 --email admin@email.com --password 'adminpassword' --out ./src/types/generated/pocketbase-types.ts",
+    "typegen:ml": "npx openapi-typescript http://localhost:8001/swagger.json -o ./src/types/generated/ml-api-schema.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc --build",
     "start": "npx tsx ./dist/main.js",
@@ -15,6 +16,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "axios": "^1.7.9",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
@@ -30,6 +32,7 @@
     "@types/multer": "^1.4.12",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.7",
+    "openapi-typescript": "^7.5.2",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3"
   }

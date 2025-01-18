@@ -22,7 +22,7 @@ RUN chown -R root:root ./*
 RUN npm run build
 
 # Expose port
-EXPOSE 8001
+EXPOSE 8002
 
 # Start the application in development mode
 CMD ["npm", "run", "dev"]
