@@ -1,6 +1,6 @@
 import { Request, Router } from "express";
 import { container } from "../configurations/dependency-injection/container";
-import { AuthenticationServiceInterface } from "../services/AuthenticationService";
+import { AuthenticationServiceInterface } from "../services/AuthenticationService/AuthenticationService";
 import { DI } from "../configurations/dependency-injection/symbols";
 
 type SignInRequest = {
