@@ -1,7 +1,7 @@
 import { Request, Router } from "express";
 import { container } from "../configurations/dependency-injection/container";
-import { AuthenticationServiceInterface } from "../services/AuthenticationService/AuthenticationService";
 import { DI } from "../configurations/dependency-injection/symbols";
+import { AuthenticationServiceInterface } from "../services/AuthenticationService/Interface";
 
 type SignInRequest = {
   email: string;
@@ -41,9 +41,21 @@ router.post("/sign-in", async (req: Request<SignInRequest>, res) => {
       DI.AuthenticationServiceInterface,
     );
 
-  const authData = await authenticationService.signIn({ email, password });
+  try {
+    const authData = await authenticationService.signIn({ email, password });
 
-  res.status(200).json(authData);
+    res.status(200).json(authData);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      res
+        .status(500)
+        .json({ message: "Error signing in", error: error.message });
+    } else {
+      res
+        .status(500)
+        .json({ message: "Error signing in", error: "Unknown error" });
+    }
+  }
 });
 
 /**
@@ -70,7 +82,18 @@ router.post("/sign-out", async (req: Request, res) => {
       DI.AuthenticationServiceInterface,
     );
 
-  await authenticationService.signOut();
-
-  res.status(200).json({ success: true });
+  try {
+    await authenticationService.signOut();
+    res.status(200).json({ success: true });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      res
+        .status(500)
+        .json({ message: "Error signing out", error: error.message });
+    } else {
+      res
+        .status(500)
+        .json({ message: "Error signing out", error: "Unknown error" });
+    }
+  }
 });

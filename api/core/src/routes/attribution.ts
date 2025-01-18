@@ -4,7 +4,7 @@ import { container } from "../configurations/dependency-injection/container";
 import { DI } from "../configurations/dependency-injection/symbols";
 import { authMiddleware } from "../middlewares/authMiddleware";
 import { AttributionServiceInterface } from "../services/AttributionService/Interface";
-import { DocumentServiceInterface } from "../services/DocumentService";
+import { DocumentServiceInterface } from "../services/DocumentService/Interface";
 import { MlApiServiceInterface } from "../services/MlApiService/Interface";
 import { AuthenticatedRequest } from "../types/globals/AuthenticatedRequest";
 import { FileParser } from "../utilities/FileParser";
@@ -99,9 +99,10 @@ router.post(
           .status(500)
           .json({ message: "Error uploading document", error: error.message });
       } else {
-        res
-          .status(500)
-          .json({ message: "Unknown error", error: "Unknown error" });
+        res.status(500).json({
+          message: "Error uploading document",
+          error: "Unknown error",
+        });
       }
     }
   },

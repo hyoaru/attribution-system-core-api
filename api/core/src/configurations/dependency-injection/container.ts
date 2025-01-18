@@ -1,16 +1,8 @@
 import { Container } from "inversify";
 import { AttributionRepository } from "../../repositories/AttributionRepository/AttributionRepository";
 import { AttributionRepositoryInterface } from "../../repositories/AttributionRepository/Interface";
-import {
-  DocumentRepository,
-  DocumentRepositoryInterface,
-} from "../../repositories/DocumentRepository";
 import { AttributionService } from "../../services/AttributionService/AttributionService";
 import { AttributionServiceInterface } from "../../services/AttributionService/Interface";
-import {
-  DocumentService,
-  DocumentServiceInterface,
-} from "../../services/DocumentService";
 import { MlApiServiceInterface } from "../../services/MlApiService/Interface";
 import { MlApiService } from "../../services/MlApiService/MlApiService";
 import { DI } from "./symbols";
@@ -20,6 +12,10 @@ import { AuthenticationService } from "../../services/AuthenticationService/Auth
 import { AuthenticationServiceInterface } from "../../services/AuthenticationService/Interface";
 import { UserRepositoryInterface } from "../../repositories/UserRepository/Interface";
 import { UserRepository } from "../../repositories/UserRepository/UserRepository";
+import { DocumentService } from "../../services/DocumentService/DocumentService";
+import { DocumentServiceInterface } from "../../services/DocumentService/Interface";
+import { DocumentRepository } from "../../repositories/DocumentRepository/DocumentRepository";
+import { DocumentRepositoryInterface } from "../../repositories/DocumentRepository/Interface";
 
 const container = new Container();
 
