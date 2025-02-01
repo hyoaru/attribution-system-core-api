@@ -4,6 +4,15 @@ import { AttributionRepositoryInterface } from "./Interface";
 
 @injectable()
 export class AttributionRepository implements AttributionRepositoryInterface {
+  async get(
+    params: Parameters<AttributionRepositoryInterface["get"]>[0],
+  ): ReturnType<AttributionRepositoryInterface["get"]> {
+    const pb = PocketbaseService.getClient();
+    return await pb.collection("attributions").getOne(params.id, {
+      expand: "document_id",
+    });
+  }
+
   async getAll(
     params: Parameters<AttributionRepositoryInterface["getAll"]>[0],
   ): ReturnType<AttributionRepositoryInterface["getAll"]> {

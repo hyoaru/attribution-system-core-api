@@ -17,7 +17,69 @@ type GetAllAttributionsRequestQueryParams = {
   sector?: string;
 };
 
+type GetAttibutionParams = {
+  id: string;
+};
+
 export const router = Router();
+
+/**
+ * @swagger
+ * /attributions/{id}:
+ *   get:
+ *     summary: Get attribution by ID
+ *     description: Retrieve a specific attribution by its unique ID
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the attribution to retrieve
+ *     responses:
+ *       200:
+ *         description: Successful attribution retrieval
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/GetAttributionByIdResponse'
+ *       400:
+ *         description: Invalid ID format or query parameters
+ *       404:
+ *         description: Attribution not found
+ *       500:
+ *         description: Internal server error
+ */
+router.get(
+  "/:id",
+  authMiddleware,
+  async (req: AuthenticatedRequest<GetAttibutionParams>, res) => {
+    const { id } = req.params;
+
+    const attributionService: AttributionServiceInterface =
+      container.get<AttributionServiceInterface>(
+        DI.AttributionServiceInterface,
+      );
+
+    try {
+      const attribution = await attributionService.get({ id });
+      res.status(200).json(attribution);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        res
+          .status(500)
+          .json({ message: "Error getting attribution", error: error.message });
+      } else {
+        res.status(500).json({
+          message: "Error getting attribution",
+          error: "Unknown error",
+        });
+      }
+    }
+  },
+);
 
 /**
  * @swagger

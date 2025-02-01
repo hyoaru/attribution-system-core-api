@@ -8,6 +8,7 @@ import {
   SubCriteria,
 } from "./schemas/attribution/Attribution";
 import { GetAllAttributionsResponse } from "./schemas/attribution/GetAllAttributionsResponse";
+import { GetAttributionByIdResponse } from "./schemas/attribution/GetAttributionByIdResponse";
 import { NewAttributionRequest } from "./schemas/attribution/NewAttributionRequest";
 import { NewAttributionResponse } from "./schemas/attribution/NewAttributionResponse";
 import { SignInRequest } from "./schemas/authentication/SignInRequest";
@@ -38,5 +39,6 @@ export const components = {
     EvaluationResponse,
     GetAllAttributionsResponse,
     DocumentResponse,
+    GetAttributionByIdResponse,
   },
 };

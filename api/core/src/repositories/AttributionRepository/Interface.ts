@@ -13,7 +13,12 @@ type GetAllParams = {
   sector?: string;
 };
 
+type GetParams = {
+  id: string;
+};
+
 export interface AttributionRepositoryInterface {
   create(params: CreateParams): Promise<AttributionsResponse>;
   getAll(params: GetAllParams): Promise<AttributionsResponse[]>;
+  get(params: GetParams): Promise<AttributionsResponse>;
 }
