@@ -4,11 +4,13 @@ import bodyParser from "body-parser";
 import { swaggerUi, specs } from "./configurations/swagger/swagger";
 import { router as routerAuth } from "./routes/authentication";
 import { router as routerAttribution } from "./routes/attribution";
+import cors from "cors";
 
 export const createApp = () => {
   dotenv.config();
 
   app.use(bodyParser.json());
+  app.use(cors());
 
   app.use("/authentication", routerAuth);
   app.use("/attributions", routerAttribution);
