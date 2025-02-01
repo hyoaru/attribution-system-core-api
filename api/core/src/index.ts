@@ -10,7 +10,12 @@ export const createApp = () => {
   dotenv.config();
 
   app.use(bodyParser.json());
-  app.use(cors());
+  app.use(
+    cors({
+      origin: "http://localhost:5173",
+      credentials: true,
+    }),
+  );
 
   app.use("/authentication", routerAuth);
   app.use("/attributions", routerAttribution);
