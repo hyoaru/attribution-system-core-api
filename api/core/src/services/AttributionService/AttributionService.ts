@@ -24,6 +24,15 @@ export class AttributionService implements AttributionServiceInterface {
     this._documentRepository = documentRepository;
   }
 
+  async getAll(
+    params: Parameters<AttributionServiceInterface["getAll"]>[0],
+  ): ReturnType<AttributionServiceInterface["getAll"]> {
+    return await this._attributionRepository.getAll(params).catch((res) => {
+      console.log(res);
+      throw res;
+    });
+  }
+
   async attribute(
     params: Parameters<AttributionServiceInterface["attribute"]>[0],
   ): ReturnType<AttributionServiceInterface["attribute"]> {

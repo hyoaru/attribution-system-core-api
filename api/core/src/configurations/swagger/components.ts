@@ -7,11 +7,13 @@ import {
   NLIEvaluation,
   SubCriteria,
 } from "./schemas/attribution/Attribution";
+import { GetAllAttributionsResponse } from "./schemas/attribution/GetAllAttributionsResponse";
 import { NewAttributionRequest } from "./schemas/attribution/NewAttributionRequest";
 import { NewAttributionResponse } from "./schemas/attribution/NewAttributionResponse";
 import { SignInRequest } from "./schemas/authentication/SignInRequest";
 import { SignInResponse } from "./schemas/authentication/SignInResponse";
 import { SignOutResponse } from "./schemas/authentication/SignOutResponse";
+import { DocumentResponse } from "./schemas/document/DocumentResponse";
 
 export const components = {
   securitySchemes: {
@@ -34,5 +36,7 @@ export const components = {
     Criteria,
     CriteriaSection,
     EvaluationResponse,
+    GetAllAttributionsResponse,
+    DocumentResponse,
   },
 };

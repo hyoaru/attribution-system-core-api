@@ -8,6 +8,11 @@ type AttributeParams = {
   proposedBudget: number;
 };
 
+type GetAllParams = {
+  sector?: string;
+};
+
 export interface AttributionServiceInterface {
   attribute(params: AttributeParams): Promise<AttributionsResponse>;
+  getAll(params: GetAllParams): Promise<AttributionsResponse[]>;
 }

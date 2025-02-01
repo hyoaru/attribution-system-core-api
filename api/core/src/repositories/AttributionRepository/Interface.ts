@@ -9,6 +9,11 @@ type CreateParams = {
   proposedBudget: number;
 };
 
+type GetAllParams = {
+  sector?: string;
+};
+
 export interface AttributionRepositoryInterface {
   create(params: CreateParams): Promise<AttributionsResponse>;
+  getAll(params: GetAllParams): Promise<AttributionsResponse[]>;
 }

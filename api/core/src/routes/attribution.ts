@@ -13,7 +13,60 @@ type NewAttributionRequest = {
   proposed_budget: number;
 };
 
+type GetAllAttributionsRequestQueryParams = {
+  sector?: string;
+};
+
 export const router = Router();
+
+/**
+ * @swagger
+ * /attributions:
+ *   get:
+ *     summary: Get all attributions
+ *     description: Get all the list of attributions
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: sector
+ *         schema:
+ *           type: string
+ *         description: Filter attributions by sector
+ *     responses:
+ *       200:
+ *         description: Successful attribution listing
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/GetAllAttributionsResponse'
+ *       400:
+ *         description: Invalid credentials
+ *       500:
+ *         description: Internal server error
+ */
+router.get("/", authMiddleware, async (req: AuthenticatedRequest, res) => {
+  const { sector } = req.query as GetAllAttributionsRequestQueryParams;
+
+  const attributionService: AttributionServiceInterface =
+    container.get<AttributionServiceInterface>(DI.AttributionServiceInterface);
+
+  try {
+    const attributions = await attributionService.getAll({ sector });
+    res.status(200).json(attributions);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      res
+        .status(500)
+        .json({ message: "Error getting attributions", error: error.message });
+    } else {
+      res.status(500).json({
+        message: "Error getting attributions",
+        error: "Unknown error",
+      });
+    }
+  }
+});
 
 /**
  * @swagger
