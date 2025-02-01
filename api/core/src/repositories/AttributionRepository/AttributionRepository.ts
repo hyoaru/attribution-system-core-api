@@ -4,6 +4,17 @@ import { AttributionRepositoryInterface } from "./Interface";
 
 @injectable()
 export class AttributionRepository implements AttributionRepositoryInterface {
+  async update(
+    params: Parameters<AttributionRepositoryInterface["update"]>[0],
+  ): ReturnType<AttributionRepositoryInterface["update"]> {
+    const pb = PocketbaseService.getClient();
+
+    return await pb.collection("attributions").update(params.id, {
+      sector: params.sector,
+      attribution: params.attribution,
+      proposed_budget: params.proposedBudget,
+    });
+  }
   async get(
     params: Parameters<AttributionRepositoryInterface["get"]>[0],
   ): ReturnType<AttributionRepositoryInterface["get"]> {

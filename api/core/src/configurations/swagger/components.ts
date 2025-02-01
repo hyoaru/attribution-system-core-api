@@ -11,6 +11,8 @@ import { GetAllAttributionsResponse } from "./schemas/attribution/GetAllAttribut
 import { GetAttributionByIdResponse } from "./schemas/attribution/GetAttributionByIdResponse";
 import { NewAttributionRequest } from "./schemas/attribution/NewAttributionRequest";
 import { NewAttributionResponse } from "./schemas/attribution/NewAttributionResponse";
+import { UpdateAttributionRequest } from "./schemas/attribution/UpdateAttributionRequest";
+import { UpdateAttributionResponse } from "./schemas/attribution/UpdateAttributionResponse";
 import { SignInRequest } from "./schemas/authentication/SignInRequest";
 import { SignInResponse } from "./schemas/authentication/SignInResponse";
 import { SignOutResponse } from "./schemas/authentication/SignOutResponse";
@@ -40,5 +42,7 @@ export const components = {
     GetAllAttributionsResponse,
     DocumentResponse,
     GetAttributionByIdResponse,
+    UpdateAttributionResponse,
+    UpdateAttributionRequest,
   },
 };

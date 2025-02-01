@@ -6,6 +6,7 @@ import { authMiddleware } from "../middlewares/authMiddleware";
 import { AttributionServiceInterface } from "../services/AttributionService/Interface";
 import { AuthenticatedRequest } from "../types/globals/AuthenticatedRequest";
 import { FileParser } from "../utilities/FileParser";
+import { EvaluationResponse } from "../types/ml-types";
 
 type NewAttributionRequest = {
   title: string;
@@ -21,7 +22,86 @@ type GetAttibutionParams = {
   id: string;
 };
 
+type UpdateAttributionParams = {
+  id: string;
+  sector: string;
+  attribution: EvaluationResponse;
+  proposed_budget: number;
+};
+
 export const router = Router();
+
+/**
+ * @swagger
+ * /attributions/{id}:
+ *   patch:
+ *     summary: Update attribution by ID
+ *     description: Update a specific attribution by its unique ID
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the attribution to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/UpdateAttributionRequest'
+ *     responses:
+ *       200:
+ *         description: Successful attribution update
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/UpdateAttributionResponse'
+ *       400:
+ *         description: Invalid ID format or request body
+ *       404:
+ *         description: Attribution not found
+ *       500:
+ *         description: Internal server error
+ */
+router.patch(
+  "/:id",
+  authMiddleware,
+  async (req: AuthenticatedRequest<UpdateAttributionParams>, res) => {
+    const { id } = req.params;
+    const { sector, attribution, proposed_budget } = req.body;
+
+    const attributionService: AttributionServiceInterface =
+      container.get<AttributionServiceInterface>(
+        DI.AttributionServiceInterface,
+      );
+
+    try {
+      const updatedAttribution = await attributionService.update({
+        id,
+        sector,
+        attribution,
+        proposedBudget: proposed_budget,
+      });
+
+      res.status(200).json(updatedAttribution);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        res.status(500).json({
+          message: "Error updating attribution",
+          error: error.message,
+        });
+      } else {
+        res.status(500).json({
+          message: "Error updating attribution",
+          error: "Unknown error",
+        });
+      }
+    }
+  },
+);
 
 /**
  * @swagger
