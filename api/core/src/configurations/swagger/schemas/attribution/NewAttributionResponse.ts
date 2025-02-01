@@ -31,6 +31,11 @@ export const NewAttributionResponse = {
       description: "The sector to evaluate the document to",
       example: "education",
     },
+    proposed_budget: {
+      type: "number",
+      description: "The proposed budget for the document",
+      example: 1000000,
+    },
     attribution: {
       $ref: "#/components/schemas/EvaluationResponse",
       description: "The attribution data",

@@ -6,6 +6,7 @@ type CreateParams = {
   documentId: string;
   sector: string;
   attribution: EvaluationResponse;
+  proposedBudget: number;
 };
 
 export interface AttributionRepositoryInterface {

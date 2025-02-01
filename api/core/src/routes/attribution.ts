@@ -10,6 +10,7 @@ import { FileParser } from "../utilities/FileParser";
 type NewAttributionRequest = {
   title: string;
   sector: string;
+  proposed_budget: number;
 };
 
 export const router = Router();
@@ -48,7 +49,7 @@ router.post(
   authMiddleware,
   upload.single("document"),
   async (req: AuthenticatedRequest<NewAttributionRequest>, res) => {
-    const { title, sector } = req.body;
+    const { title, sector, proposed_budget } = req.body;
     const document = req.file;
 
     const attributionService: AttributionServiceInterface =
@@ -72,6 +73,7 @@ router.post(
         userId: req.user!.id,
         title: title,
         document: parsedDocument,
+        proposedBudget: proposed_budget,
       });
 
       res.status(200).json(attributionRecord);

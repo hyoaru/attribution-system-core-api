@@ -5,6 +5,7 @@ type AttributeParams = {
   sector: string;
   userId: string;
   document: File;
+  proposedBudget: number;
 };
 
 export interface AttributionServiceInterface {

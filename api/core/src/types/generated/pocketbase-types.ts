@@ -92,6 +92,8 @@ export type AttributionsRecord<Tattribution = unknown> = {
 	created?: IsoDateString
 	document_id: RecordIdString
 	id: string
+	proposed_budget?: number
+	sector: string
 	updated?: IsoDateString
 	user_id?: RecordIdString
 }

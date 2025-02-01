@@ -44,6 +44,7 @@ export class AttributionService implements AttributionServiceInterface {
       documentId: documentRecord.id,
       sector: params.sector,
       attribution: attributionData,
+      proposedBudget: params.proposedBudget,
     });
   }
 }

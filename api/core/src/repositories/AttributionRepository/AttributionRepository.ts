@@ -14,6 +14,7 @@ export class AttributionRepository implements AttributionRepositoryInterface {
       document_id: params.documentId,
       sector: params.sector,
       attribution: params.attribution,
+      proposed_budget: params.proposedBudget,
     });
   }
 }
